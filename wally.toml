@@ -1,0 +1,9 @@
+[package]
+name = "call23re/views"
+version = "0.1.0"
+realm = "shared"
+registry = "https://github.com/upliftgames/wally-index"
+
+[dependencies]
+Roact = "roblox/roact@1.4.4"
+Hooks = "kampfkarren/roact-hooks@0.5.1"

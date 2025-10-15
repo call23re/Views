@@ -1,0 +1,16 @@
+{
+	"name": "Camera-Switcher",
+	"tree": {
+		"$className": "DataModel",
+		"ServerStorage": {
+			"$className": "ServerStorage",
+			"Camera-Switcher": {
+				"$className": "Folder",
+				"Packages": {
+					"$path": "Packages"
+				},
+				"$path": "src"
+			}
+		}
+	}
+}
