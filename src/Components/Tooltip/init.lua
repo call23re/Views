@@ -7,9 +7,9 @@ local Button = require(script.Button)
 local useTheme = require(script.Parent.useTheme)
 
 local function Tooltip(props, hooks)
-	local theme = useTheme(hooks)
+	local theme = useTheme(hooks).Tooltip
 
-	local backgroundColor = theme:GetColor(Enum.StudioStyleGuideColor.Button, Enum.StudioStyleGuideModifier.Default)
+	local backgroundColor = theme.BackgroundColor
 
 	local function onInputBegan(_, input)
 		if input.UserInputType == Enum.UserInputType.MouseMovement then

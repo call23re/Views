@@ -6,17 +6,12 @@ local Roact = require(Plugin.Packages.Roact)
 local useTheme = require(script.Parent.Parent.useTheme)
 
 local function Button(props, hooks)
-	local theme = useTheme(hooks)
+	local theme = useTheme(hooks).Tooltip.Button
 
 	local hovered, setHover = hooks.useState(false)
 
-	local modifier = Enum.StudioStyleGuideModifier.Default
-	if hovered then
-		modifier = Enum.StudioStyleGuideModifier.Hover
-	end
-
-	local backgroundColor = theme:GetColor(Enum.StudioStyleGuideColor.Button, modifier)
-	local textColor = theme:GetColor(Enum.StudioStyleGuideColor.ButtonText, modifier)
+	local backgroundColor = if hovered then theme.BackgroundColor.Hover else theme.BackgroundColor.Default
+	local textColor = theme.TextColor
 
 	local function onInputBegan(_, input)
 		if input.UserInputType == Enum.UserInputType.MouseMovement then
@@ -45,7 +40,7 @@ local function Button(props, hooks)
 		Icon = Roact.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			Image = props.Icon,
-			ImageColor3 = textColor,
+			ImageColor3 = theme.IconColor,
 			LayoutOrder = 0,
 			Size = props.IconSize,
 		}),

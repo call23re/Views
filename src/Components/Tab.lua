@@ -12,24 +12,23 @@ local function sanitize(text)
 end
 
 local function Tab(props, hooks)
-	local theme = useTheme(hooks)
+	local theme = useTheme(hooks).Tab
 
 	local hovered, setHover = hooks.useState(false)
 	local focused, setFocused = hooks.useState(false)
 	local lastClicked, setLastClicked = hooks.useState(os.clock())
 	local inputState, setInputState = hooks.useState(props.New)
 
-	local modifier = Enum.StudioStyleGuideModifier.Default
-	if props.Selected then
-		modifier = Enum.StudioStyleGuideModifier.Selected
-	elseif hovered then
-		modifier = Enum.StudioStyleGuideModifier.Hover
-	end
+	local backgroundColor =
+		if props.Selected then
+			theme.BackgroundColor.Selected
+		elseif hovered then
+			theme.BackgroundColor.Hover
+		else
+			theme.BackgroundColor.Default
 
-	local backgroundColor = theme:GetColor(Enum.StudioStyleGuideColor.Button, modifier)
-	local textColor = theme:GetColor(Enum.StudioStyleGuideColor.ButtonText, modifier)
-	local hue, saturation, value = textColor:ToHSV()
-	local placeholderTextColor = Color3.fromHSV(hue, saturation, value - 0.1)
+	local textColor = theme.TextColor
+	local placeholderTextColor = theme.PlaceholderTextColor
 
 	hooks.useEffect(function()
 		setInputState(props.New)
@@ -81,7 +80,7 @@ local function Tab(props, hooks)
 		Icon = Roact.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			Image = "rbxassetid://16116210846",
-			ImageColor3 = textColor,
+			ImageColor3 = theme.IconColor,
 			LayoutOrder = 0,
 			Size = UDim2.fromOffset(14, 12),
 		}),
@@ -126,7 +125,7 @@ local function Tab(props, hooks)
 		Remove = if not props.Main then Roact.createElement("ImageButton", {
 			BackgroundTransparency = 1,
 			Image = "rbxassetid://16116217702",
-			ImageColor3 = textColor,
+			ImageColor3 = theme.IconColor,
 			Size = UDim2.fromOffset(8, 8),
 			LayoutOrder = 2,
 			[Roact.Event.Activated] = props.OnRemove

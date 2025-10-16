@@ -8,7 +8,7 @@ local useTheme = require(script.Parent.useTheme)
 local Tab = require(script.Parent.Tab)
 
 local function List(props, hooks)
-	local theme = useTheme(hooks)
+	local theme = useTheme(hooks).List
 
 	local prevWidth, setWidth = hooks.useState()
 	local width = math.min(prevWidth or math.huge, props.Width - 52)
@@ -93,7 +93,7 @@ local function List(props, hooks)
 			Size = UDim2.fromOffset(26, 26),
 			Text = "+",
 			TextSize = 22,
-			TextColor3 = theme:GetColor(Enum.StudioStyleGuideColor.ButtonText, Enum.StudioStyleGuideModifier.Selected),
+			TextColor3 = theme.Add.TextColor,
 			Font = Enum.Font.Gotham,
 			LayoutOrder = 1,
 			[Roact.Event.Activated] = props.Add
